@@ -2,16 +2,16 @@
 
 ## 项目简介
 
-使用表格型 Q-Learning 来训练Gymnasium 的 CartPole-v1 环境的控制策略。
+使用表格型 Q-Learning 来训练 Gymnasium 的 CartPole-v1 环境的控制策略。
 
 ## 依赖
 
 通过运行以下代码来快速构建环境
 
-'''
+```
 conda env create -f environment.yml
 conda activate cartpole_env
-'''
+```
 
 ## 文件结构
 
