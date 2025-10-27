@@ -1,4 +1,4 @@
-# Q-Learning CartPole (v1)
+# Q-Learning CartPole-v1
 
 ## 项目简介
 
@@ -13,7 +13,7 @@ conda env create -f environment.yml
 conda activate cartpole_env
 '''
 
-## 文件结构（简要）
+## 文件结构
 
 ```
 Q-Learning_CartPole_v1/
