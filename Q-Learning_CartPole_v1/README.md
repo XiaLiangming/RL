@@ -6,7 +6,7 @@
 
 ## 依赖
 
-通过运行以下代码来快速构建环境
+通过运行以下代码来快速构建环境：
 
 ```
 conda env create -f environment.yml
