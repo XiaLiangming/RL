@@ -1,4 +1,4 @@
-# Q-Learning CartPole-v1
+# Play Atari Breakout with Deep Q-Learning
 
 ## 项目简介
 
