@@ -29,5 +29,5 @@ DQN_Breakout/
 ├─ environment.yml # 依赖
 ├─ model.py        # 存放 Pytorch DQN 模型类（DQN、Dueling DQN）
 ├─ README.md       # 本文件
-└─ utils.py        # 存放评估函数
+└─ utils.py        # 存放评估函数和一些画图函数
 ```
