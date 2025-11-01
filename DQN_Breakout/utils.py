@@ -8,6 +8,10 @@ import os
 import pandas as pd
 import matplotlib.pyplot as plt
 
+import numpy as np
+
+import wandb
+
 def evaluate_model(model: nn.Module,
                    Env: type,
                    frame_stacking: int,
@@ -71,3 +75,35 @@ def plot_history(history_path: str,
     plt.tight_layout()
     plt.savefig(save_path)
     print(f"Learning curve saved to {save_path}.")
+
+def upload_wandb(history_path: str,
+                 project_name: str,
+                 run_name: str):
+    
+    df = pd.read_csv(history_path, sep=r"\s+", engine="python")
+    episode_diff = df['Episode'].diff().fillna(0)
+    df['Episode'] = 10000 / episode_diff.replace(0, np.nan)
+    df['Episode'] = df['Episode'].fillna(0)
+    wandb.init(project=project_name, name=run_name)
+    for _, row in df.iterrows():
+        wandb.log({
+            "Episode": row['Episode'],
+            "AvgTrainReward": row['AvgTrainReward'],
+            "AvgLoss": row['AvgLoss'],
+            "Step": row['Step'],
+            "Epsilon": row['Epsilon'],
+            "AvgEvalReward": row['AvgEvalReward']
+        })
+    wandb.finish()
+    print(f"History from {history_path} uploaded to Weights & Biases project '{project_name}'.")
+
+if __name__ == "__main__":
+    upload_wandb(history_path="./history/dqn_vanilla.csv",
+                 project_name="DQN-Breakout",
+                 run_name="Vanilla")
+    upload_wandb(history_path="./history/dqn_nature.csv",
+                 project_name="DQN-Breakout",
+                 run_name="Nature")
+    upload_wandb(history_path="./history/dqn_double.csv",
+                 project_name="DQN-Breakout",
+                 run_name="Double")
