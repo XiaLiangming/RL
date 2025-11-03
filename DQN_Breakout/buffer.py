@@ -67,8 +67,8 @@ class PrioritizedReplayBuffer:
                  max_steps: int,
                  alpha: float,
                  beta: float,
-                 min_priority: float,
-                 device: torch.device):
+                 device: torch.device,
+                 min_priority: float = 1e-5):
         self._size = 0
         self._capacity = capacity
         self._observation_space = observation_space
@@ -89,7 +89,7 @@ class PrioritizedReplayBuffer:
         self._idx_offsets = torch.arange(-frame_stacking, 0, 1, device=device).view(1, -1)
         self._indices = None
         self._c = 0
-
+        
     def push(self,
              frame: torch.Tensor,
              action: torch.Tensor,
@@ -101,9 +101,7 @@ class PrioritizedReplayBuffer:
         self._dones[self._idx] = done
         if self._c == self._frame_stacking:
             self._valid_idx[self._idx] = True
-            max_priority = self._max_priority
-            max_priority = max(max_priority, self._min_priority)
-            self._priorities[self._idx] = max_priority
+            self._priorities[self._idx] = max(self._max_priority, self._min_priority)
         if done:
             self._c = 0
         else:
@@ -123,7 +121,7 @@ class PrioritizedReplayBuffer:
         probabilities = (self._priorities * self._valid_idx) ** self._alpha
         probabilities /= probabilities.sum()
         # Sample indices based on probabilities
-        self._indices = torch.multinomial(probabilities, batch_size, replacement=False)
+        self._indices = torch.multinomial(probabilities, batch_size, replacement=True)
         state_idx = ((self._indices.view(-1,1) + self._idx_offsets) % self._capacity).view(-1)
         next_state_idx = (state_idx + 1) % self._capacity
         states = self._frames[state_idx].view(batch_size, self._frame_stacking, *self._observation_space)
@@ -135,10 +133,10 @@ class PrioritizedReplayBuffer:
         weights = (self._size * probabilities[self._indices]) ** (-self._beta)
         weights = weights / weights.max()
         
-        return states.float(), actions.long(), rewards.float(), next_states.float(), dones.long(), weights.float()
+        return states.float(), actions.long(), rewards.float(), next_states.float(), dones.long(), weights.unsqueeze(1).float()
 
     def update_priorities(self, td_errors: torch.Tensor):
-        td_errors = td_errors.detach().abs().clamp(min=self._min_priority)
+        td_errors = td_errors.abs().clamp(min=self._min_priority)
         self._max_priority = max(self._max_priority, td_errors.max().item())
         self._priorities[self._indices] = td_errors.squeeze()
 

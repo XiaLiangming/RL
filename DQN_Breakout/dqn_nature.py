@@ -127,7 +127,7 @@ def train(device: torch.device,
                     best_eval_reward = avg_eval_reward
                     torch.save(online_model.state_dict(), best_model_save_path)
                 avg_train_reward = total_train_reward / eval_steps
-                avg_loss = total_loss / (eval_steps / batch_size) if step > warmup_steps else 0
+                avg_loss = total_loss / eval_steps if step > warmup_steps else 0
                 with open(history_path, "a") as f:
                     f.write(f"{episode:<10}\t{avg_train_reward:<15.4f}\t{avg_loss:<15.4f}\t{step:<10}\t{epsilon:<10.4f}\t{avg_eval_reward:<15.2f}\n")
                 print(f"Episode: {episode}, AvgTrainReward: {avg_train_reward:.4f}, AvgLoss: {avg_loss:.4f}, Step: {step}, Epsilon: {epsilon:.4f}, AvgEvalReward: {avg_eval_reward:.2f}")

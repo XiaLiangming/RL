@@ -107,3 +107,12 @@ if __name__ == "__main__":
     upload_wandb(history_path="./history/dqn_double.csv",
                  project_name="DQN-Breakout",
                  run_name="Double")
+    upload_wandb(history_path="./history/dqn_dueling.csv",
+                 project_name="DQN-Breakout",
+                 run_name="Dueling")
+    upload_wandb(history_path="./history/dqn_per.csv",
+                 project_name="DQN-Breakout",
+                 run_name="PER")
+    upload_wandb(history_path="./history/dqn_per_clip.csv",
+                 project_name="DQN-Breakout",
+                 run_name="PER-Clip")

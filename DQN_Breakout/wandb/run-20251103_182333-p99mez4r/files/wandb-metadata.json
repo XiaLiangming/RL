@@ -1,0 +1,40 @@
+{
+  "os": "Windows-10-10.0.26100-SP0",
+  "python": "CPython 3.9.23",
+  "startedAt": "2025-11-03T10:23:33.070121Z",
+  "program": "F:\\ExperiCode\\RL\\DQN_Breakout\\utils.py",
+  "codePath": "DQN_Breakout\\utils.py",
+  "codePathLocal": "utils.py",
+  "git": {
+    "remote": "https://github.com/XiaLiangming/RL.git",
+    "commit": "816d46c32bfe5b9c839e41217b11499d097ab8ab"
+  },
+  "email": "3210102964@zju.edu.cn",
+  "root": "F:\\ExperiCode\\RL\\DQN_Breakout",
+  "host": "CarpeDiem",
+  "executable": "D:\\miniconda3\\envs\\rl\\python.exe",
+  "cpu_count": 12,
+  "cpu_count_logical": 24,
+  "gpu": "NVIDIA GeForce RTX 5070 Ti",
+  "gpu_count": 1,
+  "disk": {
+    "/": {
+      "total": "275012120576",
+      "used": "2611978240"
+    }
+  },
+  "memory": {
+    "total": "33407602688"
+  },
+  "gpu_nvidia": [
+    {
+      "name": "NVIDIA GeForce RTX 5070 Ti",
+      "memoryTotal": "17094934528",
+      "cudaCores": 8960,
+      "architecture": "Blackwell",
+      "uuid": "GPU-8704bed2-4e3d-ec48-8b5f-04d56acf8b39"
+    }
+  ],
+  "cudaVersion": "13.0",
+  "writerId": "mydf6v73puan592m5k0sostf0fw1011s"
+}
