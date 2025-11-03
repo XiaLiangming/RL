@@ -23,8 +23,10 @@ DQN_Breakout/
 ├─ plots           # 训练过程中的评估奖励曲线
 ├─ buffer.py       # 存放经验缓冲区类（ER、PER）
 ├─ dqn_double.py   # Double DQN
-├─ dqn_nature.py   # 2015 Nature DQN
-├─ dqn_vanilla.py  # 2013 Vanilla DQN
+├─ dqn_dueling.py  # Dueling DQN
+├─ dqn_nature.py   # Nature DQN (2015)
+├─ dqn_per.py      # DQN with Prioritized Experience Replay
+├─ dqn_vanilla.py  # 2013 Vanilla DQN (2013)
 ├─ env.py          # 存放 Breakout 环境类
 ├─ environment.yml # 依赖
 ├─ model.py        # 存放 Pytorch DQN 模型类（DQN、Dueling DQN）
